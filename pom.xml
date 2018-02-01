@@ -14,6 +14,13 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.jfrog.buildinfo</groupId>
+      <artifactId>artifactory-maven-plugin</artifactId>
+      <version>2.6.1</version>
+      <type>pom</type>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -63,7 +70,65 @@
                 </dependency>
             </dependencies>
         </plugin>
-
+       <plugin>
+            <groupId>org.jfrog.buildinfo</groupId>
+            <artifactId>artifactory-maven-plugin</artifactId>
+            <version>2.6.1</version>
+            <inherited>false</inherited>
+            <executions>
+                <execution>
+                    <id>build-info</id>
+                    <goals>
+                        <goal>publish</goal>
+                    </goals>
+                    <configuration>
+                        <deployProperties>
+                            <gradle>awesome</gradle>
+                            <review.team>qa</review.team>
+                        </deployProperties>
+                        <publisher>
+                            <contextUrl>http://jenkins201_artifactory:8081/artifactory/</contextUrl>
+                            <username>admin</username>
+                            <password>s2iabos</password>
+                            <repoKey>libs-release-local</repoKey>
+                            <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
+                        </publisher>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>http://jenkins201_artifactory:8081/artifactory/libs-release</url>
+    </repository>
+    <repository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>http://jenkins201_artifactory:8081/artifactory/libs-snapshot</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>http://jenkins201_artifactory:8081/artifactory/libs-release</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>http://jenkins201_artifactory:8081/artifactory/libs-snapshot</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
