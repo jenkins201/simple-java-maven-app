@@ -53,7 +53,7 @@ HERE
         }
         stage ('Install') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
+                sh 'mvn -q -Dmaven.test.failure.ignore=true install'
             }
             post {
                 success {
@@ -63,7 +63,7 @@ HERE
         }
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -q -B -DskipTests clean package'
             }
         }
         stage('Test') {
