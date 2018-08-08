@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2 --network jenkins-container_default'
+            args '-v /root/.m2:/root/.m2 --network jenkins201_default'
         }
     }
     stages {
