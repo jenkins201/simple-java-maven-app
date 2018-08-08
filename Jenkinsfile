@@ -51,16 +51,6 @@ HERE
                 '''
             }
         }
-        stage ('Install') {
-            steps {
-                sh 'mvn -q -Dmaven.test.failure.ignore=true install'
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml'
-                }
-            }
-        }
         stage('Build') {
             steps {
                 sh 'mvn -q -B -DskipTests clean package'
